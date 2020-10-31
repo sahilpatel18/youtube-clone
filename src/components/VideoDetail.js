@@ -9,7 +9,7 @@ const VideoDetail = ({ video }) => {
   console.log(video);
   return (
     <React.Fragment>
-      <Paper elevation={6} style={{ height: "70%" }}>
+      <Paper elevation={6} style={{ height: "60%", margin: "20px" }}>
         <iframe
           frameBorder="0"
           height="100%"
@@ -18,7 +18,7 @@ const VideoDetail = ({ video }) => {
           src={videoSrc}
         />
       </Paper>
-      <Paper elevation={6} style={{ padding: "15px" }}>
+      <Paper elevation={6} style={{ padding: "15px", margin: "20px" }}>
         <Typography varient="h4">
           {video.snippet.title} - {video.snippet.channelTitle}
         </Typography>
