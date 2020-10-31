@@ -5,13 +5,22 @@ import VideoDetail from "./components/VideoDetail";
 // import VideoList from "./components/VideoList";
 import { Grid } from "@material-ui/core";
 import youtube from "./api/youtube";
+import VideoList from "./components/VideoList";
 const YT_API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
 
 class App extends React.Component {
   state = {
-    video: [],
+    videos: [],
     selectedVideo: null,
   };
+
+  componentDidMount(){
+    this.handleSubmit()
+  }
+
+  onVideoSelect = (video) => {
+    this.setState({selectedVideo: video})
+  }
 
   handleSubmit = async (searchTerm) => {
     const response = await youtube.get("search", {
@@ -30,6 +39,7 @@ class App extends React.Component {
   };
 
   render() {
+    const { videos, selectedVideo } = this.state;
     return (
       <Grid justify="center" container spacing={16}>
         <Grid item xs={12}>
@@ -38,10 +48,10 @@ class App extends React.Component {
               <SearchBar onFormSubmit={this.handleSubmit} />
             </Grid>
             <Grid item xs={8}>
-              <VideoDetail video={this.state.selectedVideo} />
+              <VideoDetail video={selectedVideo} />
             </Grid>
             <Grid item xs={4}>
-              VideoList
+              <VideoList onVideoSelect={this.onVideoSelect} videos={videos} />
             </Grid>
           </Grid>
         </Grid>
